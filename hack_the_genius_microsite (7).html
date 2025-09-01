@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hack the Genius - Myridius AI Innovation Hackathon 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Myridius Brand Colors */
+        :root {
+            --carbon-moss: #0C2226;
+            --quantum-leaf: #194247;
+            --pulse-green: #52E081;
+            --infinite-mint: #D2F0C6;
+            --primary-green: #52E081;
+            --secondary-green: #194247;
+            --dark-navy: #0C2226;
+            --light-gray: #f8fafc;
+            --medium-gray: #64748b;
+            --dark-gray: #0C2226;
+            --white: #ffffff;
+            --accent-green: #D2F0C6;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--carbon-moss);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--pulse-green);
+        }
+
+        .cta-button {
+            background: transparent;
+            color: var(--pulse-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid var(--pulse-green);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--pulse-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(82, 224, 129, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--carbon-moss) 0%, var(--quantum-leaf) 50%, #2a5259 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="g"><stop stop-color="%2352E081" stop-opacity="0.1"/><stop offset="1" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23g)"/><circle cx="800" cy="300" r="150" fill="url(%23g)"/><circle cx="300" cy="700" r="120" fill="url(%23g)"/></svg>') no-repeat;
+            background-size: cover;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            background: rgba(82, 224, 129, 0.1);
+            border: 1px solid var(--pulse-green);
+            color: var(--pulse-green);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--pulse-green);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideInUp 1s ease-out 0.4s both;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-dates {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .date-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(82, 224, 129, 0.2);
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .date-label {
+            color: var(--pulse-green);
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        .date-value {
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease-out 0.8s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pulse-green), var(--quantum-leaf));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(82, 224, 129, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--carbon-moss);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--carbon-moss);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Tracks Section */
+        .tracks {
+            background: var(--light-gray);
+        }
+
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+        }
+
+        .track-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .track-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--pulse-green), var(--quantum-leaf));
+        }
+
+        .track-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .track-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--pulse-green), var(--quantum-leaf));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .track-icon img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .track-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--carbon-moss);
+            margin-bottom: 1rem;
+        }
+
+        .track-description {
+            color: var(--medium-gray);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .track-examples {
+            list-style: none;
+        }
+
+        .track-examples li {
+            color: var(--medium-gray);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .track-examples li::before {
+            content: '•';
+            color: var(--pulse-green);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            background: white;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .timeline-date {
+            background: linear-gradient(135deg, var(--pulse-green), var(--quantum-leaf));
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            font-weight: 700;
+            min-width: 120px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(82, 224, 129, 0.3);
+        }
+
+        .timeline-content {
+            margin-left: 2rem;
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--carbon-moss);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        /* Metrics Section */
+        .metrics {
+            background: var(--light-gray);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--pulse-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--medium-gray);
+            font-weight: 600;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            font-weight: 600;
+            color: var(--carbon-moss);
+            cursor: pointer;
+            transition: background 0.3s ease;
+            position: relative;
+        }
+
+        .faq-question:hover {
+            background: #e2e8f0;
+        }
+
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--pulse-green);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 1000px;
+        }
+
+        .faq-answer p {
+            color: var(--medium-gray);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Registration Section */
+        .registration {
+            background: linear-gradient(135deg, var(--carbon-moss), var(--pulse-green));
+            color: white;
+            text-align: center;
+        }
+
+        .registration .section-title {
+            color: white;
+        }
+
+        .registration .section-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--carbon-moss);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--pulse-green);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: var(--pulse-green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .hero-dates {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .tracks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeline-content {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Animations for scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="https://myridius.com/hs-fs/hubfs/myridius-dkbkgrnd-2.png?width=480&height=112&name=myridius-dkbkgrnd-2.png" alt="Myridius">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#tracks">Tracks</a></li>
+                <li><a href="#timeline">Timeline</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <a href="#registration" class="cta-button">Register Now</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                Myridius AI Innovation Hackathon 2025
+            </div>
+            <h1 class="hero-title">Hack the Genius</h1>
+            <h2 class="hero-subtitle">Infinite Ideas. One Genius Community</h2>
+            <p class="hero-description">
+                Unleash the myriad of genius in you. Join our global community in creating practical GenAI solutions that will transform how we work and serve our clients.
+            </p>
+            
+            <div class="hero-dates">
+                <div class="date-item">
+                    <span class="date-label">Registration Deadline</span>
+                    <span class="date-value">September 8, 2025</span>
+                </div>
+                <div class="date-item">
+                    <span class="date-label">Demo Videos Due</span>
+                    <span class="date-value">September 19, 2025</span>
+                </div>
+                <div class="date-item">
+                    <span class="date-label">Finals</span>
+                    <span class="date-value">September 26-27, 2025</span>
+                </div>
+            </div>
+
+            <div class="hero-buttons">
+                <a href="#registration" class="btn-primary">Register Now</a>
+                <a href="#timeline" class="btn-secondary">View Timeline</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Unleash the Myriad of Genius in You</h2>
+                <p class="section-subtitle">
+                    Hack the Genius is designed to provide hands-on experience in creating practical GenAI solutions for our global teams, enhancing both our service offerings and internal capabilities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracks Section -->
+    <section id="tracks" class="section tracks">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Two Innovation Tracks</h2>
+                <p class="section-subtitle">
+                    Whether you're technical or non-technical, there's a track for you to showcase your genius
+                </p>
+            </div>
+            
+            <div class="tracks-grid">
+                <div class="track-card fade-in">
+                    <div class="track-icon">
+                        <img src="https://img.icons8.com/material-outlined/96/ffffff/target.png" alt="Target">
+                    </div>
+                    <h3 class="track-title">Functional Track</h3>
+                    <p class="track-description">
+                        Focus on GenAI applications that solve business problems and improve customer-facing or operational processes. Build solutions that end users directly interact with to accomplish business objectives.
+                    </p>
+                    <ul class="track-examples">
+                        <li>Customer service automation</li>
+                        <li>Business intelligence assistants</li>
+                        <li>Document processing solutions</li>
+                        <li>Personalized user experiences</li>
+                    </ul>
+                </div>
+                
+                <div class="track-card fade-in">
+                    <div class="track-icon">
+                        <img src="https://img.icons8.com/material-outlined/96/ffffff/settings.png" alt="Settings">
+                    </div>
+                    <h3 class="track-title">Technical Track</h3>
+                    <p class="track-description">
+                        Focus on GenAI applications that enhance the software development lifecycle and improve internal productivity. Build solutions that help developers, testers, and technical teams work more efficiently.
+                    </p>
+                    <ul class="track-examples">
+                        <li>Code review assistants</li>
+                        <li>QA framework automation</li>
+                        <li>Requirements to code translation</li>
+                        <li>Development process optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="section timeline">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Event Timeline</h2>
+                <p class="section-subtitle">Important dates and milestones for the hackathon</p>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">Sep 3</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Official Launch</h3>
+                        <p class="timeline-description">Email announcement and detailed guidelines</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">Sep 8</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Registration Deadline</h3>
+                        <p class="timeline-description">Team submissions due by end of day</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">Sep 11-18</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Initial Review</h3>
+                        <p class="timeline-description">Jury evaluates submissions</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">Sep 19</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Demo Videos Due</h3>
+                        <p class="timeline-description">5-minute solution recordings to be uploaded</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">Sep 26-27</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Final Presentations & Awards</h3>
+                        <p class="timeline-description">Live demos to jury panel and winner announcements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="section metrics">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">By the Numbers</h2>
+                <p class="section-subtitle">Live metrics from our genius community</p>
+            </div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card fade-in">
+                    <div class="metric-number" id="submissions">---</div>
+                    <div class="metric-label">Total Submissions</div>
+                </div>
+                <div class="metric-card fade-in">
+                    <div class="metric-number" id="participants">---</div>
+                    <div class="metric-label">Participants</div>
+                </div>
+                <div class="metric-card fade-in">
+                    <div class="metric-number" id="regions">---</div>
+                    <div class="metric-label">Participating Regions</div>
+                </div>
+                <div class="metric-card fade-in">
+                    <div class="metric-number" id="teams">---</div>
+                    <div class="metric-label">Teams Registered</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section faq">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Everything you need to know about participating</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item fade-in">
+                    <div class="faq-question">Who can participate in Hack the Genius?</div>
+                    <div class="faq-answer">
+                        <p>All Myridius employees globally can participate, regardless of technical background. We welcome both technical and non-technical team members.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">Do I need coding experience to participate?</div>
+                    <div class="faq-answer">
+                        <p>Not at all! Teams can create solutions using no-code platforms like Retool, N8n, Microsoft Power Platform, Bubble, Glide, or Chatbase.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">What's the team size and composition?</div>
+                    <div class="faq-answer">
+                        <p>Teams must have exactly 3 members. You can mix technical and non-technical backgrounds. Cross-regional teams are encouraged but not mandatory. If you register individually, our panel will help form teams.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">What's the registration deadline?</div>
+                    <div class="faq-answer">
+                        <p>September 8, 2025, by end of day. No extensions will be provided, so make sure to submit your registration on time.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">What information do I need for registration?</div>
+                    <div class="faq-answer">
+                        <p>You'll need: Team name & theme selection, Problem statement (200 words), Proposed solution approach (300 words), Team member profiles (name, role, location), and Expected outcomes & impact.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">How will solutions be evaluated?</div>
+                    <div class="faq-answer">
+                        <p>Primary criteria (70%): Use of AI tools & innovation (25%), Technical implementation (25%), Business impact (20%). Secondary criteria (30%): Presentation quality (15%), Team collaboration (10%), Future scalability (5%).</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">What are the prizes and recognition?</div>
+                    <div class="faq-answer">
+                        <p>Grand prizes for overall winner and track winners, special recognition for Most Innovative Solution and Best Cross-Regional Team. All participants receive certificates and Amazon vouchers.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">What platforms and tools can we use?</div>
+                    <div class="faq-answer">
+                        <p>Any combination of cloud computing (AWS/Azure/GCP), GenAI platforms (OpenAI, Claude, Gemini), development stacks, and no-code platforms. You can also use additional platforms like OpenLLaMA, crewai, langflow, Salesforce, ServiceNow.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">When do demo videos need to be submitted?</div>
+                    <div class="faq-answer">
+                        <p>September 19, 2025. Videos should be exactly 5 minutes long showcasing your solution, explaining the problem it solves, and demonstrating its key features.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">How will final presentations work?</div>
+                    <div class="faq-answer">
+                        <p>Top 10 teams will present live demos to the jury panel on September 26-27. You'll have time for a presentation followed by Q&A from the judges.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">What happens to winning solutions?</div>
+                    <div class="faq-answer">
+                        <p>Winning solutions will be considered for integration with Evoq offerings, client presentations, and potential funding for go-to-market development. There's also opportunity for IP protection and mentorship.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">Can I change my team composition after registration?</div>
+                    <div class="faq-answer">
+                        <p>Minor changes may be accommodated before September 8. Contact the support team through the dedicated Teams channel for assistance with team modifications.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">Are there any restrictions on external APIs or services?</div>
+                    <div class="faq-answer">
+                        <p>No major restrictions. Teams can use external APIs, services, and integrate with existing systems as needed for their solution. Just ensure you have proper access and permissions.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">Where can I get help and support?</div>
+                    <div class="faq-answer">
+                        <p>Use our dedicated Teams channel for fastest response, email hackthegenius@myridius.com for general inquiries, or contact your regional PoCs for location-specific support.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">What if I have more questions during the hackathon?</div>
+                    <div class="faq-answer">
+                        <p>We'll have a Global Call on September 15 to provide details about submissions and answer questions. You can also reach out anytime through our support channels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Everything You Need to Succeed</h2>
+                <p class="section-subtitle">Comprehensive resources to help you build amazing solutions</p>
+            </div>
+            
+            <div class="tracks-grid">
+                <div class="track-card fade-in">
+                    <div class="track-icon">
+                        <img src="https://img.icons8.com/material-outlined/96/ffffff/document.png" alt="Documentation">
+                    </div>
+                    <h3 class="track-title">Documentation & Guidelines</h3>
+                    <ul class="track-examples">
+                        <li>Hackathon Guidelines PDF</li>
+                        <li>Registration Guide</li>
+                        <li>Submission Template</li>
+                        <li>Evaluation Criteria</li>
+                    </ul>
+                </div>
+                
+                <div class="track-card fade-in">
+                    <div class="track-icon">
+                        <img src="https://img.icons8.com/material-outlined/96/ffffff/wrench.png" alt="Tools">
+                    </div>
+                    <h3 class="track-title">Technical Resources</h3>
+                    <ul class="track-examples">
+                        <li>Cloud Computing Platforms (AWS/Azure/GCP)</li>
+                        <li>GenAI Platforms (OpenAI, Claude, Gemini)</li>
+                        <li>Development Resources (Python, Node.js, APIs)</li>
+                        <li>Sample Datasets</li>
+                    </ul>
+                </div>
+                
+                <div class="track-card fade-in">
+                    <div class="track-icon">
+                        <img src="https://img.icons8.com/material-outlined/96/ffffff/template.png" alt="Platforms">
+                    </div>
+                    <h3 class="track-title">No-Code Platforms</h3>
+                    <ul class="track-examples">
+                        <li>Retool</li>
+                        <li>Microsoft Power Platform</li>
+                        <li>Bubble & Glide</li>
+                        <li>Chatbase & N8n</li>
+                    </ul>
+                </div>
+                
+                <div class="track-card fade-in">
+                    <div class="track-icon">
+                        <img src="https://img.icons8.com/material-outlined/96/ffffff/light-bulb.png" alt="Inspiration">
+                    </div>
+                    <h3 class="track-title">Inspiration & Examples</h3>
+                    <ul class="track-examples">
+                        <li>Functional Track Examples</li>
+                        <li>Technical Track Examples</li>
+                        <li>Past Hackathon Winners</li>
+                        <li>AI Innovation Trends</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration" class="section registration">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Join the Genius Community</h2>
+                <p class="section-subtitle">Ready to hack the genius? Register your team now and be part of this exciting journey toward AI-driven innovation.</p>
+            </div>
+            
+            <div class="hero-buttons fade-in">
+                <a href="#" class="btn-primary">Start Registration</a>
+                <a href="#" class="btn-secondary">View Guidelines</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" style="background: var(--light-gray);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Need Help? We're Here for You!</h2>
+                <p class="section-subtitle">Connect with our support team and regional contacts</p>
+            </div>
+            
+            <div class="tracks-grid">
+                <div class="track-card fade-in">
+                    <div class="track-icon">
+                        <img src="https://img.icons8.com/material-outlined/96/ffffff/headset.png" alt="Support">
+                    </div>
+                    <h3 class="track-title">General Inquiries</h3>
+                    <p class="track-description">
+                        <strong>Email:</strong> hackthegenius@myridius.com<br>
+                        <strong>Teams Channel:</strong> Dedicated support channel<br>
+                        <strong>Response Time:</strong> Within 24 hours
+                    </p>
+                </div>
+                
+                <div class="track-card fade-in">
+                    <div class="track-icon">
+                        <img src="https://img.icons8.com/material-outlined/96/ffffff/globe.png" alt="Global">
+                    </div>
+                    <h3 class="track-title">Regional Support</h3>
+                    <p class="track-description">
+                        Regional Points of Contact available for:<br>
+                        • North America<br>
+                        • Europe<br>
+                        • Asia Pacific<br>
+                        • Other Regions
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Hack the Genius</h3>
+                <p>Infinite Ideas. One Genius Community</p>
+                <p>Driving Innovation Through Intelligent AI Solutions</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#overview">Overview</a></p>
+                <p><a href="#tracks">Tracks</a></p>
+                <p><a href="#timeline">Timeline</a></p>
+                <p><a href="#resources">Resources</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <p><a href="#faq">FAQ</a></p>
+                <p><a href="#">Contact Us</a></p>
+                <p><a href="#">Teams Channel</a></p>
+                <p><a href="#">Guidelines</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Myridius</h3>
+                <p><a href="https://myridius.com">Corporate Website</a></p>
+                <p><a href="#">About Us</a></p>
+                <p><a href="#">Careers</a></p>
+                <p><a href="#">Privacy Policy</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Myridius. All rights reserved. | Hack the Genius - AI Innovation Hackathon 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(12, 34, 38, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = 'var(--carbon-moss)';
+                navbar.style.backdropFilter = 'none';
+            }
+        });
+
+        // Animated counter for metrics (placeholder functionality)
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current) + '+';
+            }, 20);
+        }
+
+        // Initialize counters when metrics section becomes visible
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Placeholder values - these would be updated with real data
+                    animateCounter(document.getElementById('submissions'), 150);
+                    animateCounter(document.getElementById('participants'), 450);
+                    animateCounter(document.getElementById('regions'), 8);
+                    animateCounter(document.getElementById('teams'), 50);
+                    metricsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const metricsSection = document.querySelector('.metrics');
+        if (metricsSection) {
+            metricsObserver.observe(metricsSection);
+        }
+
+        // Mobile menu toggle (if needed later)
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.track-card, .metric-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Dynamic greeting based on time
+        function updateGreeting() {
+            const now = new Date();
+            const hour = now.getHours();
+            let greeting = 'Welcome';
+            
+            if (hour < 12) greeting = 'Good Morning';
+            else if (hour < 18) greeting = 'Good Afternoon';
+            else greeting = 'Good Evening';
+            
+            // This could be used to personalize the experience
+            console.log(`${greeting}, Genius!`);
+        }
+        
+        updateGreeting();
+    </script>
+</body>
+</html>
