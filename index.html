@@ -381,6 +381,15 @@
             left: 0;
         }
 
+        .example-item {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .example-item:hover {
+            color: var(--pulse-green);
+        }
+
         /* Timeline Section */
         .timeline {
             background: white;
@@ -974,10 +983,10 @@
                     </div>
                     <h3 class="track-title">Technical Resources</h3>
                     <ul class="track-examples">
-                        <li>Cloud Computing Platforms (AWS/Azure/GCP)</li>
-                        <li>GenAI Platforms (OpenAI, Claude, Gemini)</li>
-                        <li>Development Resources (Python, Node.js, APIs)</li>
-                        <li>Sample Datasets</li>
+                        <li><a href="https://aws.amazon.com" target="_blank" style="color: inherit; text-decoration: none;">Cloud Computing Platforms (AWS</a>/<a href="https://azure.microsoft.com" target="_blank" style="color: inherit; text-decoration: none;">Azure</a>/<a href="https://cloud.google.com" target="_blank" style="color: inherit; text-decoration: none;">GCP)</a></li>
+                        <li>GenAI Platforms (<a href="https://openai.com" target="_blank" style="color: inherit; text-decoration: none;">OpenAI</a>, <a href="https://claude.ai" target="_blank" style="color: inherit; text-decoration: none;">Claude</a>, <a href="https://gemini.google.com" target="_blank" style="color: inherit; text-decoration: none;">Gemini</a>)</li>
+                        <li>Development Resources (<a href="https://python.org" target="_blank" style="color: inherit; text-decoration: none;">Python</a>, <a href="https://nodejs.org" target="_blank" style="color: inherit; text-decoration: none;">Node.js</a>, APIs)</li>
+                        <li><a href="https://kaggle.com/datasets" target="_blank" style="color: inherit; text-decoration: none;">Sample Datasets</a></li>
                     </ul>
                 </div>
                 
@@ -987,10 +996,15 @@
                     </div>
                     <h3 class="track-title">No-Code Platforms</h3>
                     <ul class="track-examples">
-                        <li>Retool</li>
-                        <li>Microsoft Power Platform</li>
-                        <li>Bubble & Glide</li>
-                        <li>Chatbase & N8n</li>
+                        <li><a href="https://retool.com" target="_blank" style="color: inherit; text-decoration: none;">Retool</a></li>
+                        <li><a href="https://lovable.dev" target="_blank" style="color: inherit; text-decoration: none;">Lovable</a></li>
+                        <li><a href="https://replit.com" target="_blank" style="color: inherit; text-decoration: none;">Replit</a></li>
+                        <li><a href="https://bolt.new" target="_blank" style="color: inherit; text-decoration: none;">Bolt</a></li>
+                        <li><a href="https://n8n.io" target="_blank" style="color: inherit; text-decoration: none;">N8n</a></li>
+                        <li><a href="https://powerplatform.microsoft.com" target="_blank" style="color: inherit; text-decoration: none;">Microsoft Power Platform</a></li>
+                        <li><a href="https://bubble.io" target="_blank" style="color: inherit; text-decoration: none;">Bubble</a></li>
+                        <li><a href="https://glideapps.com" target="_blank" style="color: inherit; text-decoration: none;">Glide</a></li>
+                        <li><a href="https://chatbase.co" target="_blank" style="color: inherit; text-decoration: none;">Chatbase</a></li>
                     </ul>
                 </div>
                 
@@ -1000,11 +1014,18 @@
                     </div>
                     <h3 class="track-title">Inspiration & Examples</h3>
                     <ul class="track-examples">
-                        <li>Functional Track Examples</li>
-                        <li>Technical Track Examples</li>
-                        <li>Past Hackathon Winners</li>
-                        <li>AI Innovation Trends</li>
+                        <li class="example-item" data-example="functional">Functional Track Examples</li>
+                        <li class="example-item" data-example="technical">Technical Track Examples</li>
+                        <li><a href="https://www.gartner.com/en/newsroom/press-releases/2025-08-05-gartner-hype-cycle-identifies-top-ai-innovations-in-2025" target="_blank" style="color: inherit; text-decoration: none;">AI Innovation Trends</a></li>
                     </ul>
+                    
+                    <!-- Example Modal -->
+                    <div class="example-modal" id="exampleModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; padding: 2rem; overflow-y: auto;">
+                        <div style="background: white; max-width: 800px; margin: 0 auto; border-radius: 15px; padding: 2rem; position: relative; max-height: 90vh; overflow-y: auto;">
+                            <span class="close-modal" style="position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; cursor: pointer; color: var(--medium-gray);">&times;</span>
+                            <div id="modalContent"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1211,6 +1232,68 @@
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0) scale(1)';
             });
+        });
+
+        // Example modal functionality
+        const exampleItems = document.querySelectorAll('.example-item');
+        const modal = document.getElementById('exampleModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.querySelector('.close-modal');
+
+        const examples = {
+            functional: {
+                title: 'Functional Track Example',
+                teamName: 'SmartServe AI',
+                problem: 'Customer service agents spend 60% of their time on repetitive queries about account balances, transaction history, and basic troubleshooting, leading to longer wait times and reduced satisfaction for complex issues requiring human expertise.',
+                solution: 'We\'ll develop an AI-powered customer service assistant that integrates with existing CRM systems to handle tier-1 support queries automatically. The solution will use natural language processing to understand customer intent, retrieve account information securely, and provide personalized responses. For complex issues, it will intelligently escalate to human agents with full context and suggested solutions. The system will continuously learn from successful resolutions to improve accuracy.',
+                impact: 'Reduce tier-1 query resolution time from 8 minutes to 30 seconds, allowing human agents to focus on complex problem-solving. Target 70% automation rate for routine queries, improving customer satisfaction scores and reducing operational costs by 40%. The solution will be scalable across multiple client verticals with customizable knowledge bases.'
+            },
+            technical: {
+                title: 'Technical Track Example',
+                teamName: 'CodeGen Pro',
+                problem: 'QA teams spend 40+ hours per sprint manually writing test cases from user stories, often missing edge cases and creating inconsistent test coverage. This bottleneck delays releases and reduces overall software quality.',
+                solution: 'We\'ll build an AI-powered test generation framework that analyzes user stories, acceptance criteria, and UI mockups to automatically generate comprehensive test cases including happy paths, edge cases, and negative scenarios. The system will integrate with existing project management tools and generate executable test scripts in multiple formats (Selenium, Cypress, REST API tests). It will learn from historical defect patterns to prioritize high-risk scenarios.',
+                impact: 'Reduce test case creation time from 40 hours to 2 hours per sprint while increasing test coverage by 60%. Generate 500+ test scenarios automatically with 85% accuracy rate. Enable faster release cycles and improve software quality through comprehensive automated testing, allowing QA teams to focus on exploratory testing and complex validation scenarios.'
+            }
+        };
+
+        exampleItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const exampleType = this.dataset.example;
+                const example = examples[exampleType];
+                
+                modalContent.innerHTML = `
+                    <h2 style="color: var(--carbon-moss); margin-bottom: 1rem; font-size: 1.5rem;">${example.title}</h2>
+                    <h3 style="color: var(--pulse-green); margin-bottom: 1rem;">Team Name: ${example.teamName}</h3>
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--carbon-moss); margin-bottom: 0.5rem;">Problem Statement:</h4>
+                        <p style="color: var(--medium-gray); line-height: 1.6;">${example.problem}</p>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--carbon-moss); margin-bottom: 0.5rem;">Proposed Solution Approach:</h4>
+                        <p style="color: var(--medium-gray); line-height: 1.6;">${example.solution}</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--carbon-moss); margin-bottom: 0.5rem;">Expected Outcomes & Impact:</h4>
+                        <p style="color: var(--medium-gray); line-height: 1.6;">${example.impact}</p>
+                    </div>
+                `;
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
         });
 
         // Dynamic greeting based on time
